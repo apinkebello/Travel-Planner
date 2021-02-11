@@ -39,48 +39,10 @@ app.post('/all', addData)
 function addData (req, res) {
     // all the data sent by users
     let newData = req.body
-    // let newData = {temperature: data.temperature,
-    //     date: data.date,
-    //     userResponse: data.userResponse
-    // }
-     console.log(newData)
+    console.log(newData)
     projectData.temperature = newData.temperature
     projectData.date = newData.date
     projectData.userResponse = newData.userResponse
     console.log(projectData)
     res.send("data received")
 }
-
-// MOVIE EXAMPLE
-// const data = [];
-// app.post('/addMovie', addMovie)
-
-// function addMovie (req, res){
-//     l
-//     data.push(req.body)
-    
-//     console.log(data)
-// }
-
-
-// Setup empty JS object to act as endpoint for all routes
-// Express to run server and routes
-
-// Start up an instance of app
-
-/* Dependencies */
-/* Middleware*/
-
-//Here we are configuring express to use body-parser as middle-ware.
-// Cors for cross origin allowanceii
-
-// Initialize the main project folder
-
-// Spin up the server
-// Callback to debug
-
-// Initialize all route with a callback function
-
-// Callback function to complete GET '/all'
-
-// Post Route

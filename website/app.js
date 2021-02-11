@@ -1,12 +1,10 @@
 /* Global Variables */
- 
+ // Personal API Key for OpenWeatherMap API
+let baseURL= 'https://api.openweathermap.org/data/2.5/weather?'
+const apiKey = '0f158dfb22b70b189a48a1e8a09deac0';
 // Create a new date instance dynamically with JS
 let d = new Date();
-let currentDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
-
-// Personal API Key for OpenWeatherMap API
-let baseURL= 'https://api.openweathermap.org/data/2.5/weather?'
-let apiKey = '0f158dfb22b70b189a48a1e8a09deac0';
+let currentDate = d.getMonth()+1+'.'+ d.getDate()+'.'+ d.getFullYear();
 // Event listener to add function to existing HTML DOM element
 document.getElementById('generate').addEventListener('click', performForecast);
 /* Function called by event listener */
@@ -24,31 +22,22 @@ function performForecast(e){
             console.log(newData)
             retrieveWeatherData('http://localhost:8000/all')
             .then(function(data){
-                document.getElementById("date").innerHTML = data.date;
-                document.getElementById("temp").innerHTML = data.temperature.toString();
-                document.getElementById("content").innerHTML = data.userResponse;
-            })
-            
+                updateUI(data)
+             }
+            )
         }) 
     })
 }
-// api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
+// api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}&units=imperial
 /* Function to GET Web API Data*/
 const getWeatherData = async (baseURL, zip, key)=>{
-    const res = await fetch(baseURL+'zip='+zip+',us&appid='+key)
+    const res = await fetch(baseURL+'zip='+zip+',us&appid='+key+'&units=imperial')
         try{
             const data = await res.json();
-            // console.log(data.main.temp)
-            // const temp = data.main.temp
-            // const date = currentDate
-            // const userResponse = document.getElementById('feelings').value
-            // projectData('http://localhost:8000/all', {temperature:temp, date:date, userResponse:userResponse}) 
             return data;
         }catch (error){
             console.log("error", error)
-        }
-
-    
+        }    
 }    
 // Function to POST data
 const projectData = async (url = '', data = {})=>{
@@ -70,7 +59,6 @@ const projectData = async (url = '', data = {})=>{
             console.log("error", error);
             // appropriately handle the error
         };
-
 };
 // Function to GET Project Data 
 const retrieveWeatherData = async (url = '') =>{
@@ -84,4 +72,11 @@ const retrieveWeatherData = async (url = '') =>{
     catch (error){
         console.log("error", error);
     }
+}
+
+// Function to update the UI
+const updateUI = (data) => {
+    document.getElementById("date").innerHTML = data.date;
+    document.getElementById("temp").innerHTML = data.temperature.toString();
+    document.getElementById("content").innerHTML = data.userResponse;   
 }
