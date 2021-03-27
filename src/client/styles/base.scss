@@ -3,19 +3,32 @@
 
 
 body {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     min-height: 100vh;
 }
 
-main {
-    flex: 2;
-}
+// main {
+//     flex: 2;
+// }
 
 section {
-    max-width: 800px;
+    max-width: 500px;
     margin: 50px auto;
 }
+// .section {
+    
+//     height: 100vh;
+//     position: relative;
+//     width: 100vw;
+//   }
+// img {
+//     border-radius: 50%;
+//     height: 100%;
+//     object-fit: cover;
+//     width: 100%;
+// }
+ 
 .button{
     border: none;
     color: black;
@@ -27,6 +40,7 @@ section {
     cursor: pointer;
 }
 .container{
+    position:relative;
     display: grid;
     width: 100%;
     height: 100%;
@@ -39,12 +53,16 @@ section {
     border: 3px solid red;
 }
 
+
+
+
+
 @media (max-width:360px){
     .container{
         background-color: tomato;
     /* set display to grid*/
         display: grid;
-        width: 100%;
+        width: auto;
         margin: auto;
 /* set up rows and columns*/
 

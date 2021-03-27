@@ -1,5 +1,24 @@
+// header {
+//     display: flex;
+//     justify-content: space-between;
+//     padding: 10px 40px;
+// }
+$color-light:skyblue;
+
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 40px;
-}
+    background-color: $color-light;
+    box-shadow: 0 0.8rem 2rem rgba(0,0,0,0.1);
+    height: 50px;
+    position: relative;
+    width: 100vw;
+    z-index: 5;
+  
+    @media only screen and (min-width: 350px) {
+      min-height: 6rem;
+      max-height: 7rem;
+    } 
+  }
+
+  .logo__image{
+      position: top-left;
+  }

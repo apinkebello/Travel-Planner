@@ -4,11 +4,11 @@
         <meta charset="utf-8">
         <title>Travel App</title>
         <link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/styles/resets.css">
+        <!-- <link rel="stylesheet" href="/styles/resets.css">
         <link rel="stylesheet" href="/styles/base.css">
         <link rel="stylesheet" href="/styles/header.css">
         <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
+        <link rel="stylesheet" href="/styles/footer.css"> -->
     </head>
 
     <body>
@@ -16,7 +16,8 @@
             <header>
                 <div class="header">
                 <nav class="nav_bar" > 
-                    <a href="#about" class="nav_bar_item"> <img src="./img/logo.png" alt="brand logo" class="logo__image"></a>  
+                    <a href="#about" class="nav_bar_item"> 
+                        <!-- <img src="./img/logo.png" alt="brand logo" class="logo__image"></a>   -->
                     <h2 class="nav_bar__title">Travel Planner</h2>
                     <ul class="nav_bar__menu">
                         <li class="nav_bar__list"><a href="#about">About</a></li>
@@ -29,11 +30,11 @@
         <main>
             <!-- About the Journey -->
             <section id="about" class="section section__about">
-                <div class="map__wrapper">
-                    <div class="about__map">
-                        <h1 class="map__heading"> Travel Time</h1>
-                        <h3 class="map__title">The travel planner</h3>
-                        <a href="#" class="map__link">Trip Details</a>
+                <div class="map_wrapper">
+                    <div class="about_map">
+                        <h1 class="map_heading"> Travel Time</h1>
+                        <h3 class="map_title">The travel planner</h3>
+                        <a href="#" class="map_link">Trip Details</a>
                     </div>
                 </div>
             </section>
@@ -42,20 +43,20 @@
                  
                     <form class="travel" >
                         <h2 class="form__heading">Plan your trip</h2>
-                        <input type="text" class="form__take_off_from" id="city" name="from" placeholder="leaving from..." placeholder="enter city here" required>
-                        <input type="text" class="form__input_destination" id="destination" name="to" placeholder="going to..." required>
-                        <input id="date_leaving" type="date" name="start-date" value="" placeholder="Leaving Date" required>
-                        <input id="date_return" type="date" name="end-date" value="" placeholder="Return Date">
-                        <input type="submit" class="input__submit" name="submit" value="Submit">
+                        <input type="text" class="form_take_off_from" id="city_leave" name="from" placeholder="leaving from...">
+                        <input type="text" class="form_going_to" id="city" name="to" placeholder="going to...">
+                        <input type="date" class="form_date" id="date_leaving" name="start-date"  placeholder="Leaving Date">
+                        <input type="date"  class="form_date" id="date_return" name="end-date"  placeholder="Return Date">
+                        <input type="submit" class="input_submit" name="submit" value="Submit">
                     </form>
                 
             </section>
             <!-- OUTPUT Section -->
             
                 <section id="result" class="planner_output">
-                        <div class ="output_image"> 
-                            <img src="../views/img/planet-earth.png" alt="destination image" id="fromPixabay">
-                        </div>
+                        <!-- <div class ="output_image"> 
+                            <img src="../src/client/views/img/travel_img.jpeg" alt="destination image" id="fromPixabay">
+                        </div> -->
                     
                     <div class = "output_fact"> <strong>Travel Information:</strong>
                         <div class="location_coordinates"> 
