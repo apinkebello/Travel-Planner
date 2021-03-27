@@ -1,0 +1,64 @@
+@import "navigation.scss";
+@import "footer.scss";
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 2;
+}
+
+section {
+    max-width: 800px;
+    margin: 50px auto;
+}
+.button{
+    border: none;
+    color: black;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: medium;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.container{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    grid-template-rows: 80px 700px 80px;
+    grid-template-areas: 
+    "hd hd hd"
+    "main main main"
+    "ft ft ft ";
+    border: 3px solid red;
+}
+
+@media (max-width:360px){
+    .container{
+        background-color: tomato;
+    /* set display to grid*/
+        display: grid;
+        width: 100%;
+        margin: auto;
+/* set up rows and columns*/
+
+        grid-template-rows: 80px auto 50px;
+        grid-template-areas: 
+         "hd hd hd"
+        "main main main"
+        "ft ft ft ";
+        border: 3px solid red;
+    }
+    @media (max-width: 600px){
+        .footer-right, .footer-left{
+            flex:100%
+        }
+    }
+
+}

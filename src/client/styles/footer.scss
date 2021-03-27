@@ -1,0 +1,26 @@
+// footer {
+//     background: #252525;
+//     color: #e7e7e7;
+//     height: 70px;
+// }
+.footer{
+    grid-area: ft;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: skyblue;
+    /* padding: 10px; */
+    /* margin: 20px; */
+    text-align: justify;
+}
+.footer-right{
+    background-color: turquoise;
+    /* margin: 20px; */
+    /* padding: 10px; */
+    flex: 50%;
+}
+.footer-left{
+    background-color: teal;
+    /* margin: 20px; */
+    /* padding: 10px; */
+    flex: 50%;
+}
