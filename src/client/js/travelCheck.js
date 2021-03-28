@@ -105,4 +105,4 @@ function checkInputText(cityGoing, cityLeaving) {
 
 // export { checkForName }
 export { checkForName }
-// export { checkInputText }
+export { checkInputText }

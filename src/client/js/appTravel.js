@@ -24,6 +24,8 @@ function handleSubmit(event) {
   geoResults["returnDate"] = retDate;
   geoResults["cityGoing"] = cityGoing;
   geoResults["city_leave"] = cityLeaving;
+  geoResults["daysLeft"] = dateDiffInDays(startDate)
+  
   geonamesData(cityGoing)
   // .then((travelResult) =>{
   //   const userData= projectData(('http://localhost:8080/add', {cityGoing, startDate,retDate,high_temp,low_temp, weather: travelResult.weather.description,daysLeft, placeImage:travelImage.hits.webformatURL}));
@@ -34,6 +36,17 @@ function handleSubmit(event) {
   // })
 
 }
+
+const dateDiffInDays = (laterDate) => {
+  const firstDate = new Date(new Date().toISOString().slice(0, 10)), secondDate = new Date(laterDate);
+  const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+  
+  // Discard the time and time-zone information.
+  const utc1 = Date.UTC(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
+  const utc2 = Date.UTC(secondDate.getFullYear(), secondDate.getMonth(), secondDate.getDate());
+  
+  return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+  }
 
 
 const geonamesData = async city => {
@@ -122,9 +135,9 @@ const  upDateUI = geonamesData => {
   console.log(geonamesData)
   
   document.getElementById('my_trip').innerText = `The trip to: ${geonamesData['City']}, ${geonamesData['country']}`;
-  document.getElementById('date_leaving').innerText = `is on: ${geonamesData["departureDate"]}`;
-  document.getElementById('date_return').innerText = `to return: ${geonamesData["returnDate"]}`;
-  document.getElementById('days').innerText = ` The trip is ${daysLeft} days away`;
+  document.getElementById('dateLeaving').innerText = `is on: ${geonamesData["departureDate"]}`;
+  document.getElementById('dateReturn').innerText = `to return: ${geonamesData["returnDate"]}`;
+  document.getElementById('days').innerText = ` The trip is ${geonamesData["daysLeft"]} days away`;
   document.getElementById('temp').innerText = `The temperature wil be : ${geonamesData['high_temp']}C,: ${geonamesData['low_temp']}C`;
   document.getElementById('description').innerText = `Mostly ${geonamesData['description']} all through `;
   document.getElementById('image').src = `${geonamesData['pixCityImage']}`;

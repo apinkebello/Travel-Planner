@@ -59,8 +59,8 @@
                             <img id="image">
                         </div>
                         <p id='my_trip'></p>
-                        <p id="date_leaving"></p>
-                        <p id="date_return"></p>
+                        <p id="dateLeaving"></p>
+                        <p id="dateReturn"></p>
                         <p id='days'></p>
                         <p id="weather"></p>
                         <p id="temp"></p>
@@ -79,12 +79,12 @@
         
 
     </body>
-    <script> // Check that service workers are supported
+    <!-- <script> // Check that service workers are supported
         if ('serviceWorker' in navigator) {
           // Use the window load event to keep the page load performant
           window.addEventListener('load', () => {
             navigator.serviceWorker.register('/service-worker.js');
           });
         }
-    </script>
+    </script> -->
 </html>
