@@ -94,9 +94,9 @@ const  userData = geoData => {
   console.log(geoData)
   
   document.getElementById('my_trip').innerText = `The trip to: ${geoData['City']}, ${geoData['country']}`;
-  document.getElementById('date_leaving').innerText = `is on: ${startDate}`;
-  document.getElementById('date_return').innerText = `to return: ${retDate}`;
-  document.getElementById('days').innerText = ` It is ${geoData['City']}, ${geoData['country']} is 220 days away`;
+  document.getElementById('date_leaving').innerText = `is on: ${geoResults["departureDate"]}`;
+  document.getElementById('date_return').innerText = `to return: ${geoResults["returnDate"]}`;
+  document.getElementById('days').innerText = ` The trip is ${daysLeft} days away`;
   document.getElementById('weather').innerText = `The weather will be:${geoData['weather']}` ;
   document.getElementById('temp').innerText = `The temperature wil be : ${geoData['high_temp']},: ${geoData['low_temp']}`;
   document.getElementById('description').innerText = `Mostly ${geoData['description']} all through `;

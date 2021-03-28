@@ -14,22 +14,22 @@
     <body>
         <div class="container">
             <header>
-                <div class="header">
+                <!-- <div class="header">
                 <nav class="nav_bar" > 
                     <a href="#about" class="nav_bar_item"> 
-                        <!-- <img src="./img/logo.png" alt="brand logo" class="logo__image"></a>   -->
+                        <img src="./img/logo.png" alt="brand logo" class="logo__image"></a>  
                     <h2 class="nav_bar__title">Travel Planner</h2>
                     <ul class="nav_bar__menu">
                         <li class="nav_bar__list"><a href="#about">About</a></li>
                         <li class="nav_bar__list"><a href="#planner">Plan a trip</a></li>
                     </ul>
-                </nav> 
+                </nav>  -->
             
              </header>
         
         <main>
             <!-- About the Journey -->
-            <section id="about" class="section section__about">
+            <!-- <section id="about" class="section section__about">
                 <div class="map_wrapper">
                     <div class="about_map">
                         <h1 class="map_heading"> Travel Time</h1>
@@ -37,12 +37,12 @@
                         <a href="#" class="map_link">Trip Details</a>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <!-- Planning the Journey -->
             <section id="planner" class="section section__planner">
                  
                     <form class="travel" >
-                        <h2 class="form__heading">Plan your trip</h2>
+                        <h2 class="form__heading"><strong> Plan your trip</strong></h2>
                         <input type="text" class="form_take_off_from" id="city_leave" name="from" placeholder="leaving from...">
                         <input type="text" class="form_going_to" id="city" name="to" placeholder="going to...">
                         <input type="date" class="form_date" id="date_leaving" name="start-date"  placeholder="Leaving Date">
@@ -84,11 +84,21 @@
                
         </main>
 
-        <footer class="footer">
+        <!-- <footer class="footer">
                 <div class="footer-left">Terms of Use      Privacy Policy</div>
                 <div class="footer-right"> Learn More       @2021 CY Academy</div>
             
-        </footer>
+        </footer> -->
         </div>
+        
+
     </body>
+    <script> // Check that service workers are supported
+        if ('serviceWorker' in navigator) {
+          // Use the window load event to keep the page load performant
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/service-worker.js');
+          });
+        }
+    </script>
 </html>

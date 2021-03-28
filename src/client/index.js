@@ -8,9 +8,9 @@ import { handleSubmit } from './js/appTravel'
 import './styles/resets.scss'
 import './styles/base.scss'
 import './styles/form.scss'
-import './styles/footer.scss'
-import './styles/header.scss'
-import './styles/navigation.scss'
+// import './styles/footer.scss'
+// import './styles/header.scss'
+// import './styles/navigation.scss'
 document.querySelector(".travel").addEventListener('submit', handleSubmit)
 
 // export {
