@@ -43,15 +43,15 @@ app.get('/', function (req, res) {
 // Post Route
 app.post('/add', addInfo);
 
-function addInfo(req, res) {
-  travelData['depCity'] = req.body.depCity;
-  traveltData['arrCity'] = req.body.arrCity;
-  travelData['depDate'] = req.body.depDate;
-  travelData['weather'] = req.body.weather;
-  travelData['summary'] = req.body.summary;
-  travelData['daysLeft'] = req.body.daysLeft;
-  res.send(travelData);
-}
+// function addInfo(req, res) {
+//   travelData['depCity'] = req.body.depCity;
+//   travelData['arrCity'] = req.body.arrCity;
+//   travelData['depDate'] = req.body.depDate;
+//   travelData['weather'] = req.body.weather;
+//   travelData['summary'] = req.body.summary;
+//   travelData['daysLeft'] = req.body.daysLeft;
+//   res.send(travelData);
+// }
 
 // To get data to geonames API
 app.get('/geonames', function (req, res) {
