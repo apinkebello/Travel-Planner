@@ -8,7 +8,10 @@ module.exports = {
     entry: './src/client/index.js',
     mode: 'development',
     devtool: 'source-map',
-    stats: 'verbose',
+    devServer: {
+        writeToDisk: true,
+        injectClient: false
+        },
     output: {
         libraryTarget: 'var',
         library: 'Client'

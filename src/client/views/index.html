@@ -54,22 +54,28 @@
             <!-- OUTPUT Section -->
             
                 <section id="result" class="planner_output">
-                        <!-- <div class ="output_image"> 
-                            <img src="../src/client/views/img/travel_img.jpeg" alt="destination image" id="fromPixabay">
-                        </div> -->
-                    
-                    <div class = "output_fact"> <strong>Travel Information:</strong>
-                        <div class="location_coordinates"> 
-                            <div id = "longitude"></div>
-                            <div id = "latitude"></div>
-                            <div class = "weather"> <p class= weather_text > Typical Weather for {destination} is ...{temp} </p> </div>
+                    <div class="results">
+                        <div>
+                            <img id="image">
                         </div>
+                        <p id='my_trip'></p>
+                        <p id="date_leaving"></p>
+                        <p id="date_return"></p>
+                        <p id='days'></p>
+                        <p id="weather"></p>
+                        <p id="temp"></p>
+                        <p id='description'></p>
                     </div>
                     
+                    <!-- <div class = "trip_fact"> <strong>Travel Information:</strong></div>
+                    
                     <div class= "output_text"> 
-                        <h2 class="destination_date_result"> You are leaving on: <span id="date">{startDate}</span > </h2>
+                        <h2 class="destination_date_result"> The trip on: <span id="date"></span > </h2>
                         <h2 class="destination_text_result"> to: <span id="city"></span</h2> 
-                        <h2 class="destination_countdown"> in <span id="days">{countdown} </span> days </h2>
+                        <h2 class="destination_countdown"> is <span id="days"></span> days </h2>
+                        <div class = "weather_cond"> <p id="weather"> The Weather is </p> </div>
+                        <p id="temp"> and the temperature is</p></id>
+                    </div> -->
                         <a class="button button__save" id="save" href="#">Print</a>
                         <a class="button button__delete" id="delete" href="#">Delete</a>
                        </div>   

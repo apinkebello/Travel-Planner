@@ -7,18 +7,31 @@ $color-light:skyblue;
 
 header {
     background-color: $color-light;
-    box-shadow: 0 0.8rem 2rem rgba(0,0,0,0.1);
-    height: 50px;
-    position: relative;
-    width: 100vw;
-    z-index: 5;
+    // height: 50px;
+    position: fixed;
+    width: 100%;        
+    padding: 10px 0;
+    color: #fff;
+    // z-index: 5;
+    justify-content: center;
+    // display: flex;
+    border: 2.0em;
+    
+  }
   
     @media only screen and (min-width: 350px) {
-      min-height: 6rem;
-      max-height: 7rem;
-    } 
-  }
+      header { 
+        background-color: pink;
+        height: 20px;
+        position: relative;
+        width: 60vw;
+        justify-content: center;
+        border: 0.5em;
+        
+    }  
+  } 
+  
 
-  .logo__image{
+  .logo__image {
       position: top-left;
   }
