@@ -7,9 +7,9 @@ const geoResults = {};
 // Create a new date instance dynamically with JS
 let d = new Date();
 let currentDate = d.getMonth() + 1 + "." + d.getDate() + "." + d.getFullYear();
-const timestamp = currentDate
-const timestampNow = (Date.now()) / 1000
-const daysLeft = Math.round((timestamp - timestampNow)/86400);
+const timestamp = currentDate;
+const timestampNow = Date.now() / 1000;
+const daysLeft = Math.round((timestamp - timestampNow) / 86400);
 
 //  Function called once form is submitted these values are inputed
 
@@ -24,125 +24,100 @@ function handleSubmit(event) {
   geoResults["returnDate"] = retDate;
   geoResults["cityGoing"] = cityGoing;
   geoResults["city_leave"] = cityLeaving;
-  geoResults["daysLeft"] = dateDiffInDays(startDate)
-  
-  geonamesData(cityGoing)
-  // .then((travelResult) =>{
-  //   const userData= projectData(('http://localhost:8080/add', {cityGoing, startDate,retDate,high_temp,low_temp, weather: travelResult.weather.description,daysLeft, placeImage:travelImage.hits.webformatURL}));
-  //   return userData;
-  // }).then((userData) => {
-  //    upDateUI(userData);
-
-  // })
-
+  geoResults["daysLeft"] = dateDiffInDays(startDate);
+  geonamesData(cityGoing);
 }
 
 const dateDiffInDays = (laterDate) => {
-  const firstDate = new Date(new Date().toISOString().slice(0, 10)), secondDate = new Date(laterDate);
+  const firstDate = new Date(new Date().toISOString().slice(0, 10)),
+    secondDate = new Date(laterDate);
   const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-  
+
   // Discard the time and time-zone information.
-  const utc1 = Date.UTC(firstDate.getFullYear(), firstDate.getMonth(), firstDate.getDate());
-  const utc2 = Date.UTC(secondDate.getFullYear(), secondDate.getMonth(), secondDate.getDate());
-  
+  const utc1 = Date.UTC(
+    firstDate.getFullYear(),
+    firstDate.getMonth(),
+    firstDate.getDate()
+  );
+  const utc2 = Date.UTC(
+    secondDate.getFullYear(),
+    secondDate.getMonth(),
+    secondDate.getDate()
+  );
+
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-  }
+};
 
+const geonamesData = async (city) => {
+  const geoURL = `http://api.geonames.org/searchJSON?q=${city}&maxRows=1&fuzzy=0&username=${geoUsername}`;
 
-const geonamesData = async city => {
-  
-  const  geoURL = `http://api.geonames.org/searchJSON?q=${city}&maxRows=1&fuzzy=0&username=${geoUsername}`;
-
-  const geoResponse = await fetch( geoURL);
+  const geoResponse = await fetch(geoURL);
   try {
-      const geoResult = await geoResponse.json();
-      geoResults["City"] = geoResult["geonames"][0]["toponymName"];
-      geoResults["country"] = geoResult["geonames"][0]["countryName"];
-      geoResults["long"] = geoResult["geonames"][0]["lng"];
-      geoResults["lat"] = geoResult["geonames"][0]["lat"];
-      travelWeather(geoResults);
-      travelImage(geoResults);
-      setTimeout(() => { upDateUI(geoResults); }, 1000);
+    const geoResult = await geoResponse.json();
+    geoResults["City"] = geoResult["geonames"][0]["toponymName"];
+    geoResults["country"] = geoResult["geonames"][0]["countryName"];
+    geoResults["long"] = geoResult["geonames"][0]["lng"];
+    geoResults["lat"] = geoResult["geonames"][0]["lat"];
+    travelWeather(geoResults);
+    travelImage(geoResults);
+    setTimeout(() => {
+      upDateUI(geoResults);
+    }, 1000);
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 };
 
-
-const travelWeather = async geonamesData => {
+const travelWeather = async (geonamesData) => {
   const lat = await geonamesData["lat"];
   const lon = await geonamesData["long"];
   const travelAPIKey = "b4e06de07c5d4a00b2ffb49f7a0536c3";
   const WeatherURL = `https://api.weatherbit.io/v2.0/forecast/daily?&lat=${lat}&lon=${lon}&key=${travelAPIKey}`;
   const travelWeatherData = await fetch(WeatherURL);
   try {
-      const travelResult = await travelWeatherData.json();
-      geonamesData['high_temp'] = travelResult['data'][0]['high_temp'];
-      geonamesData['low_temp'] = travelResult['data'][0]['low_temp'];
-      geonamesData['description'] = travelResult['data'][0]['weather']['description']
-      
+    const travelResult = await travelWeatherData.json();
+    geonamesData["high_temp"] = travelResult["data"][0]["high_temp"];
+    geonamesData["low_temp"] = travelResult["data"][0]["low_temp"];
+    geonamesData["description"] =
+      travelResult["data"][0]["weather"]["description"];
   } catch (error) {
-      console.log(`error: ${error}`)
+    console.log(`error: ${error}`);
   }
-}
-const travelImage = async geonamesData => {
-  const travelImageCity = geonamesData['City'];
-  const pixAPIKey = '20878180-a358efec6a521e8223bbd10f1';
-  const   imageUrlData = `https://pixabay.com/api/?key=${pixAPIKey}&q=${travelImageCity}`;
-  const pixUrlData = await fetch(  imageUrlData);
-  try {
-      const  imageData = await pixUrlData.json();
-      geonamesData['pixCityImage'] =  imageData['hits'][0]['webformatURL'];
-      
-  } catch (error) {
-      console.log(`error: ${error}`)
-  }
-}
-// Function to post on the server
-// Function to POST data
-const projectData = async (url = '', data = {})=>{
-
-  
-const req = await fetch(url, {
-      method: "POST", // GET, POST, DELETE, PUT, etc
-      credentials: "same-origin", // include, same origin, omit
-      headers: {
-          "Content-Type": "application/json;charset=UTF-8",
-      },
-      body: JSON.stringify 
-      ({
-        destination: data.cityGoing,
-        travelDate: data.startDate,
-        returnBack: data.retDate,
-        highTemp: data.high_temp,
-        lowTemp: data.low_temp,
-        weatherLike: data.weather.description,
-        daysToTravel:data.daysLeft,
-        placeImage : data.hits.webformatURL //body data type must match "Content-Type" header
-  }),
-})
-  try {
-      const userData = await req.json();
-      console.log(userData);
-      return userData
-  }catch(error) {
-      console.log("error", error);
-      // appropriately handle the error
-  };
 };
-// Function to up display Travel Information
-const  upDateUI = geonamesData => {
-  console.log(geonamesData)
-  
-  document.getElementById('my_trip').innerText = `The trip to: ${geonamesData['City']}, ${geonamesData['country']}`;
-  document.getElementById('dateLeaving').innerText = `is on: ${geonamesData["departureDate"]}`;
-  document.getElementById('dateReturn').innerText = `to return: ${geonamesData["returnDate"]}`;
-  document.getElementById('days').innerText = ` The trip is ${geonamesData["daysLeft"]} days away`;
-  document.getElementById('temp').innerText = `The temperature wil be : ${geonamesData['high_temp']}C,: ${geonamesData['low_temp']}C`;
-  document.getElementById('description').innerText = `Mostly ${geonamesData['description']} all through `;
-  document.getElementById('image').src = `${geonamesData['pixCityImage']}`;
+const travelImage = async (geonamesData) => {
+  const travelImageCity = geonamesData["City"];
+  const pixAPIKey = "20878180-a358efec6a521e8223bbd10f1";
+  const imageUrlData = `https://pixabay.com/api/?key=${pixAPIKey}&q=${travelImageCity}`;
+  const pixUrlData = await fetch(imageUrlData);
+  try {
+    const imageData = await pixUrlData.json();
+    geonamesData["pixCityImage"] = imageData["hits"][0]["webformatURL"];
+  } catch (error) {
+    console.log(`error: ${error}`);
+  }
+};
 
-}
+// Function to up display Travel Information
+const upDateUI = (geonamesData) => {
+  document.getElementById(
+    "my_trip"
+  ).innerText = `The trip to: ${geonamesData["City"]}, ${geonamesData["country"]}`;
+  document.getElementById(
+    "dateLeaving"
+  ).innerText = `is on: ${geonamesData["departureDate"]}`;
+  document.getElementById(
+    "dateReturn"
+  ).innerText = `to return: ${geonamesData["returnDate"]}`;
+  document.getElementById(
+    "days"
+  ).innerText = ` The trip is ${geonamesData["daysLeft"]} days away`;
+  document.getElementById(
+    "temp"
+  ).innerText = `The temperature will be : ${geonamesData["high_temp"]}C,: ${geonamesData["low_temp"]}C`;
+  document.getElementById(
+    "description"
+  ).innerText = `Mostly ${geonamesData["description"]} all through `;
+  document.getElementById("image").src = `${geonamesData["pixCityImage"]}`;
+};
 
 export { handleSubmit };
-
