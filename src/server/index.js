@@ -44,37 +44,31 @@ app.get('/', function (req, res) {
 app.post('/add', addData);
 
 function addData(req, res) {
-  // ProjectTravelData['depCity'] = req.body.depCity;
-  // ProjectTravelData['arrCity'] = req.body.arrCity;
-  // ProjectTravelData['depDate'] = req.body.depDate;
-  // ProjectTravelData['weather'] = req.body.weather;
-  // ProjectTravelData['description'] = req.body.summary;
-  // ProjectTravelData['daysLeft'] = req.body.daysLeft;
-  res.send(ProjectTravelData);
+  projectData['destination'] = req.body.destination;
+  projectData['travelDate'] = req.body.travelDate;
+  projectData['returnBack'] = req.body.returnBack;
+  projectData['highTemp'] = req.body.highTemp;
+  projectData['lowTemp'] = req.body.lowTemp; 
+  projectData['weatherLike'] = req.body.weatherLike;
+  projectData['daysToTravel'] = req.body.daysToTravel;
+  projectData['placeImage'] = req.body.placeImage;
+  
+  
+  res.send(ProjectData);
 }
 
-// To get data to geonames API
-app.get('/geonames', function (req, res) {
+// // To get data to geonames API
+app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))
 })
  
       
-
-const port = 8080;
+// designates what port the app will listen to for incoming requests
+const port = 8081;
 const server = app.listen(port, listening);
 
 function listening() {
   console.log(`running on localhost: ${port}`);
-
-
-
-  //     res.send(JSON.stringify({data }))
-
-
 }
 
-// designates what port the app will listen to for incoming requests
-app.listen(8080, function () {
-    console.log('Example app listening on port 8080!')
-})

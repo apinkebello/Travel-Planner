@@ -24,30 +24,18 @@ function handleSubmit(event) {
   geoResults["returnDate"] = retDate;
   geoResults["cityGoing"] = cityGoing;
   geoResults["city_leave"] = cityLeaving;
-  geonamesData(cityGoing);
-  
+  geonamesData(cityGoing)
+  // .then((travelResult) =>{
+  //   const userData= projectData(('http://localhost:8080/add', {cityGoing, startDate,retDate,high_temp,low_temp, weather: travelResult.weather.description,daysLeft, placeImage:travelImage.hits.webformatURL}));
+  //   return userData;
+  // }).then((userData) => {
+  //    upDateUI(userData);
+
+  // })
+
 }
 
-// function performForecast(e){
-//   const newZip = document.getElementById('zip').value;
-//   console.log(newZip)
-//   getWeatherData(baseURL,newZip,apiKey)
-//   .then(function(data){
-//       console.log(data.main.temp)
-//       const temp = data.main.temp;
-//       const date = currentDate;
-//       const userResponse = document.getElementById('feelings').value;
-//       projectData('http://localhost:8000/all', {temperature:temp, date:date, userResponse:userResponse})
-//       .then(function(newData){
-//           console.log(newData)
-//           retrieveWeatherData('http://localhost:8000/all')
-//           .then(function(data){
-//               updateUI(data)
-//            }
-//           )
-//       }) 
-//   })
-// }
+
 const geonamesData = async city => {
   
   const  geoURL = `http://api.geonames.org/searchJSON?q=${city}&maxRows=1&fuzzy=0&username=${geoUsername}`;
@@ -61,27 +49,13 @@ const geonamesData = async city => {
       geoResults["lat"] = geoResult["geonames"][0]["lat"];
       travelWeather(geoResults);
       travelImage(geoResults);
-       userData(geoResults);
+      setTimeout(() => { upDateUI(geoResults); }, 1000);
   } catch (error) {
       console.log(error);
   }
 };
 
-// getCityInfo(geoNamesURL, goingToText, username)
-//     .then((cityData) => {
-//       const cityLat = cityData.geonames[0].lat;
-//       const cityLong = cityData.geonames[0].lng;
-//       const country = cityData.geonames[0].countryName;
-//       const weatherData = getWeather(cityLat, cityLong, country, timestamp)
-//       return weatherData;
-//     })
-//     .then((weatherData) => {
-//       const daysLeft = Math.round((timestamp - timestampNow) / 86400);
-//       const userData = postData('http://localhost:5500/add', { leavingFromText, goingToText, depDateText, weather: weatherData.currently.temperature, summary: weatherData.currently.summary, daysLeft });
-//       return userData;
-//     }).then((userData) => {
-//       updateUI(userData);
-//     })
+
 const travelWeather = async geonamesData => {
   const lat = await geonamesData["lat"];
   const lon = await geonamesData["long"];
@@ -111,15 +85,47 @@ const travelImage = async geonamesData => {
       console.log(`error: ${error}`)
   }
 }
-const  userData = geonamesData => {
+// Function to post on the server
+// Function to POST data
+const projectData = async (url = '', data = {})=>{
+
+  
+const req = await fetch(url, {
+      method: "POST", // GET, POST, DELETE, PUT, etc
+      credentials: "same-origin", // include, same origin, omit
+      headers: {
+          "Content-Type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify 
+      ({
+        destination: data.cityGoing,
+        travelDate: data.startDate,
+        returnBack: data.retDate,
+        highTemp: data.high_temp,
+        lowTemp: data.low_temp,
+        weatherLike: data.weather.description,
+        daysToTravel:data.daysLeft,
+        placeImage : data.hits.webformatURL //body data type must match "Content-Type" header
+  }),
+})
+  try {
+      const userData = await req.json();
+      console.log(userData);
+      return userData
+  }catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+  };
+};
+// Function to up display Travel Information
+const  upDateUI = geonamesData => {
   console.log(geonamesData)
   
   document.getElementById('my_trip').innerText = `The trip to: ${geonamesData['City']}, ${geonamesData['country']}`;
   document.getElementById('date_leaving').innerText = `is on: ${geonamesData["departureDate"]}`;
   document.getElementById('date_return').innerText = `to return: ${geonamesData["returnDate"]}`;
   document.getElementById('days').innerText = ` The trip is ${daysLeft} days away`;
-  document.getElementById('weather').innerText = `The weather will be:${geonamesData['weather']}` ;
-  document.getElementById('temp').innerText = `The temperature wil be : ${geonamesData['high_temp']},: ${geonamesData['low_temp']}`;
+  document.getElementById('temp').innerText = `The temperature wil be : ${geonamesData['high_temp']}C,: ${geonamesData['low_temp']}C`;
   document.getElementById('description').innerText = `Mostly ${geonamesData['description']} all through `;
   document.getElementById('image').src = `${geonamesData['pixCityImage']}`;
 
