@@ -13,13 +13,13 @@ let username = 'apinkebello'
 
 
 
-    geocoder = new GeocoderGeonames({
-      username:      'apinkebello',
-    });
+    // geocoder = new GeocoderGeonames({
+    //   username:      'apinkebello',
+    // });
 
 
   // End points for all route
-let TravelData= {};
+let ProjectTravelData= {};
 
 const app = express()
 app.use(cors())
@@ -41,51 +41,39 @@ app.get('/', function (req, res) {
 })
 
 // Post Route
-app.post('/add', addInfo);
+app.post('/add', addData);
 
-// function addInfo(req, res) {
-//   travelData['depCity'] = req.body.depCity;
-//   travelData['arrCity'] = req.body.arrCity;
-//   travelData['depDate'] = req.body.depDate;
-//   travelData['weather'] = req.body.weather;
-//   travelData['summary'] = req.body.summary;
-//   travelData['daysLeft'] = req.body.daysLeft;
-//   res.send(travelData);
-// }
+function addData(req, res) {
+  // ProjectTravelData['depCity'] = req.body.depCity;
+  // ProjectTravelData['arrCity'] = req.body.arrCity;
+  // ProjectTravelData['depDate'] = req.body.depDate;
+  // ProjectTravelData['weather'] = req.body.weather;
+  // ProjectTravelData['description'] = req.body.summary;
+  // ProjectTravelData['daysLeft'] = req.body.daysLeft;
+  res.send(ProjectTravelData);
+}
 
 // To get data to geonames API
 app.get('/geonames', function (req, res) {
     // res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))
 })
-
-app.post('/geonames', function (req, res) {
-
-  console.log(req.body)
-  let city = req.body.city;
-  let baseURL= `http://api.geonames.org/searchJSON?q=${city}&maxRows=10&fuzzy=0&username=${username}`
-  
-  
-  fetch(baseURL)
  
-  .then(response => response.json())
-  .then(function(data) {
-      console.log(data) 
       
 
+const port = 8080;
+const server = app.listen(port, listening);
 
+function listening() {
+  console.log(`running on localhost: ${port}`);
 
 
 
   //     res.send(JSON.stringify({data }))
-  })
-
-})
 
 
+}
 
-
-/
 // designates what port the app will listen to for incoming requests
 app.listen(8080, function () {
     console.log('Example app listening on port 8080!')
