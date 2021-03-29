@@ -28,3 +28,5 @@ JS Version ES2016/ES6
 JS Standard: ESlint  
 
 Any modern browser
+# Extension
+The project implements the duration of the trip.

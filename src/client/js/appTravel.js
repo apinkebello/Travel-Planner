@@ -25,6 +25,7 @@ function handleSubmit(event) {
   geoResults["cityGoing"] = cityGoing;
   geoResults["city_leave"] = cityLeaving;
   geoResults["daysLeft"] = dateDiffInDays(startDate);
+  geoResults["tripFor"] = lenghtOfTrip(retDate, startDate);
   geonamesData(cityGoing);
 }
 
@@ -46,6 +47,12 @@ const dateDiffInDays = (laterDate) => {
   );
 
   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+};
+
+const lenghtOfTrip = (retDate, startDate) => {
+  const endDate = new Date(new Date(retDate).toISOString().slice(0, 10)),
+    begDate = new Date(startDate);
+  return Math.floor(endDate - begDate) / 1000 / 86400;
 };
 
 const geonamesData = async (city) => {
@@ -76,9 +83,9 @@ const travelWeather = async (geonamesData) => {
   const travelWeatherData = await fetch(WeatherURL);
   try {
     const travelResult = await travelWeatherData.json();
-    geonamesData["high_temp"] = travelResult["data"][0]["high_temp"];
-    geonamesData["low_temp"] = travelResult["data"][0]["low_temp"];
-    geonamesData["description"] =
+    geoResults["high_temp"] = travelResult["data"][0]["high_temp"];
+    geoResults["low_temp"] = travelResult["data"][0]["low_temp"];
+    geoResults["description"] =
       travelResult["data"][0]["weather"]["description"];
   } catch (error) {
     console.log(`error: ${error}`);
@@ -91,7 +98,9 @@ const travelImage = async (geonamesData) => {
   const pixUrlData = await fetch(imageUrlData);
   try {
     const imageData = await pixUrlData.json();
-    geonamesData["pixCityImage"] = imageData["hits"][0]["webformatURL"];
+    if (imageData["hits"][0]["webformatURL"]) {
+      geoResults["pixCityImage"] = imageData["hits"][0]["webformatURL"];
+    }
   } catch (error) {
     console.log(`error: ${error}`);
   }
@@ -117,7 +126,12 @@ const upDateUI = (geonamesData) => {
   document.getElementById(
     "description"
   ).innerText = `${geonamesData["description"]} all through. `;
-  document.getElementById("image").src = `${geonamesData["pixCityImage"]}.`;
+  if (geonamesData["pixCityImage"]) {
+    document.getElementById("image").src = `${geonamesData["pixCityImage"]}.`;
+  }
+  document.getElementById(
+    "trip_lenght"
+  ).innerText = `This trip is for ${geonamesData["tripFor"]} days.`;
 };
 
 export { handleSubmit };
