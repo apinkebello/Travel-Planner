@@ -101,23 +101,23 @@ const travelImage = async (geonamesData) => {
 const upDateUI = (geonamesData) => {
   document.getElementById(
     "my_trip"
-  ).innerText = `The trip to: ${geonamesData["City"]}, ${geonamesData["country"]}`;
+  ).innerText = `The trip to ${geonamesData["City"]}, ${geonamesData["country"]}`;
   document.getElementById(
     "dateLeaving"
-  ).innerText = `is on: ${geonamesData["departureDate"]}`;
+  ).innerText = `is on ${geonamesData["departureDate"]}`;
   document.getElementById(
     "dateReturn"
-  ).innerText = `to return: ${geonamesData["returnDate"]}`;
+  ).innerText = `to return ${geonamesData["returnDate"]}.`;
   document.getElementById(
     "days"
-  ).innerText = ` The trip is ${geonamesData["daysLeft"]} days away`;
+  ).innerText = ` The trip is ${geonamesData["daysLeft"]} days away,`;
   document.getElementById(
     "temp"
-  ).innerText = `The temperature will be : ${geonamesData["high_temp"]}C,: ${geonamesData["low_temp"]}C`;
+  ).innerText = `the temperature will be between  ${geonamesData["high_temp"]}C and ${geonamesData["low_temp"]}C.`;
   document.getElementById(
     "description"
-  ).innerText = `Mostly ${geonamesData["description"]} all through `;
-  document.getElementById("image").src = `${geonamesData["pixCityImage"]}`;
+  ).innerText = `${geonamesData["description"]} all through. `;
+  document.getElementById("image").src = `${geonamesData["pixCityImage"]}.`;
 };
 
 export { handleSubmit };

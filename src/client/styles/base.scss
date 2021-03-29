@@ -19,7 +19,11 @@ img {
     align-items: center;
     
 }
-
+div{
+    border: darkgreen;
+    border-top-left-radius: 1px;
+    border: darkorchid;
+}
  
 .button{
     border:sandybrown;
@@ -49,7 +53,14 @@ img {
     // "ft ft ft ";
     border: 3px solid red;
 }
+h2{
+    font-size: 2em;
+    appearance: bold;
+    text-align:center;
+    
 
+
+}
 
 h1 {
     text-align: center;
@@ -57,7 +68,7 @@ h1 {
     // border: 0.5em;
 }
 p{
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 
